@@ -3,6 +3,7 @@ package com.mall.demo.base.util
 import android.app.Activity
 import android.util.Log
 import android.view.View
+import android.view.Window
 
 /**
  * @author LowAndroider
@@ -10,7 +11,7 @@ import android.view.View
  */
 object ActivityUtils {
 
-    private val tag: String = ActivityUtils.javaClass.simpleName;
+    private val tag: String = ActivityUtils.javaClass.simpleName
 
     fun setAndroidNativeLightStatusBar(activity: Activity, dark: Boolean) {
         val decor = activity.window.decorView
@@ -22,6 +23,10 @@ object ActivityUtils {
     }
 
     fun error(msg: String) {
+        Log.e(tag, msg)
+    }
+
+    fun error(tag: String, msg: String) {
         Log.e(tag, msg)
     }
 }

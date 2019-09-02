@@ -4,13 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rgNavigation"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="60dp">
+
+        <RadioButton
+            style="@style/mainRadioButtonNavigation"
+            android:text="首页"
+            android:background="@drawable/home_bg"
+            android:id="@+id/rbMain"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            style="@style/mainRadioButtonNavigation"
+            android:text="消息"
+            android:id="@+id/rbMessage"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            style="@style/mainRadioButtonNavigation"
+            android:id="@+id/rbShoppingCart"
+            android:text="购物车"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            style="@style/mainRadioButtonNavigation"
+            android:id="@+id/rbCenter"
+            android:text="个人中心"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </RadioGroup>
 
 </LinearLayout>

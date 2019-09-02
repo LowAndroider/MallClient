@@ -9,6 +9,7 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.telephony.TelephonyManager
 import java.io.DataOutputStream
+import java.io.File
 import java.io.IOException
 import java.lang.reflect.Method
 import java.util.*
@@ -25,7 +26,7 @@ object SystemUtils {
      *
      * @return 返回当前系统语言。例如：当前设置的是“中文-中国”，则返回“zh-CN”
      */
-    fun getSystemLanguage() = Locale.getDefault().language
+    fun getSystemLanguage(): String? = Locale.getDefault().language
 
 
     /**
@@ -33,28 +34,28 @@ object SystemUtils {
      *
      * @return 语言列表
      */
-    fun getSystemLanguageList() = Locale.getAvailableLocales()
+    fun getSystemLanguageList(): Array<Locale>? = Locale.getAvailableLocales()
 
     /**
      * 获取当前手机系统版本号
      *
      * @return 系统版本号
      */
-    fun getSystemVersion() = android.os.Build.VERSION.RELEASE
+    fun getSystemVersion(): String? = Build.VERSION.RELEASE
 
     /**
      * 获取手机型号
      *
      * @return 手机型号
      */
-    fun getSystemModel() = android.os.Build.MODEL
+    fun getSystemModel(): String? = Build.MODEL
 
     /**
      * 获取手机厂商
      *
      * @return 手机厂商
      */
-    fun getDeviceBrand() = android.os.Build.BRAND
+    fun getDeviceBrand(): String? = Build.BRAND
 
     /**
      * 获取手机序列号
@@ -116,7 +117,7 @@ object SystemUtils {
      */
     fun reBootDevice() {
         try {
-            createSuProcess("reboot").waitFor()
+            createSuProcess("reboot")?.waitFor()
         } catch (e: InterruptedException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -130,16 +131,16 @@ object SystemUtils {
 
     fun createSuProcess(cmd: String): Process? {
         var os: DataOutputStream? = null
-        Process process = createSuProcess()
+        var process = createSuProcess()
         try {
-            os = new DataOutputStream(process.getOutputStream())
+            os = DataOutputStream(process.outputStream)
             os.writeBytes(cmd + "\n")
             os.writeBytes("exit $?\n")
         } finally {
             if (os != null) {
                 try {
                     os.close()
-                } catch (IOException e) {
+                } catch (e: IOException) {
                 }
             }
         }
@@ -147,7 +148,7 @@ object SystemUtils {
     }
 
     fun createSuProcess() : Process{
-        File rootUser = new File("/system/xbin/ru")
+        val rootUser = File("/system/xbin/ru")
         if (rootUser.exists()) {
             return Runtime.getRuntime().exec(rootUser.getAbsolutePath())
         } else {

@@ -5,7 +5,7 @@ import com.mall.demo.base.activity.BaseActivity
 
 class MainActivity : BaseActivity() {
 
-    override fun isDarkTheme(): Boolean = false
+    override fun isDarkTheme(): Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

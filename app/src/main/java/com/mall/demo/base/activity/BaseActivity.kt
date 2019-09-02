@@ -16,6 +16,8 @@ import com.mall.demo.base.util.ActivityUtils
  */
 abstract class BaseActivity: AppCompatActivity() {
 
+    protected val tag: String = this.javaClass.simpleName
+
     open fun isDarkTheme(): Boolean {
         return true
     }
